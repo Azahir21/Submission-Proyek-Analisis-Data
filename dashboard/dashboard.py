@@ -58,13 +58,14 @@ st.pyplot(fig)
 st.subheader("2. How do holidays affect bike usage compared to regular days?")
 
 st.write("### Holiday vs Non-Holiday Bike Usage")
-holiday_usage = filtered_data.groupby("holiday")["cnt"].mean()
+holiday_usage = hour_df_cleaned.groupby("holiday")["cnt"].mean()
 fig, ax = plt.subplots()
-sns.barplot(x=holiday_usage.index, y=holiday_usage.values, ax=ax, palette="Set2")
+sns.boxplot(x="holiday", y="cnt", data=hour_df_cleaned, ax=ax, palette="Set2")
 ax.set_title("Average Bike Usage: Holiday vs Non-Holiday", fontsize=14)
 ax.set_xlabel("Holiday (0 = No, 1 = Yes)", fontsize=12)
 ax.set_ylabel("Average Usage (cnt)", fontsize=12)
 st.pyplot(fig)
+
 
 st.write("### Working Day vs Non-Working Day Bike Usage")
 workingday_usage = filtered_data.groupby("workingday")["cnt"].mean()
